@@ -379,3 +379,24 @@ def get_words_by_threshold(freqs, label, threshold):
 
     ### 
     return word_list
+
+def extract_features(p_tweet, freqs):
+    '''
+    Input:
+        p_tweet: a list of token from the processed tweet
+        freqs: dictionary of words
+    Output:
+        positive, negative: a tuple of two values - sums negative and positive frequencies for the word
+        example of a positive/negative value pair:
+        (34, 2)
+    '''
+
+    # assign 0 to pos and neg summers
+    negative = positive = 0
+
+    # loop over words in tweet
+    for word in p_tweet:
+        positive += freqs.get((word, 1), 0)
+        negative += freqs.get((word, 0), 0)
+        
+    return positive, negative
